@@ -11,3 +11,12 @@ def binary_search(sorted_list, target):
     if mid_val > target:
         left_half = sorted_list[:mid_idx]
         return binary_search(left_half, target)
+
+    if mid_val < target:
+        right_half = sorted_list[mid_idx + 1:]
+        result = binary_search(right_half, target)
+        
+        if result == "value not found":
+            return result
+
+        return result + mid_idx + 1 # account for missing left hand indices
