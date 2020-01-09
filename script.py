@@ -7,3 +7,7 @@ def binary_search(sorted_list, target):
 
     if mid_val == target:
         return mid_idx
+
+    if mid_val > target:
+        left_half = sorted_list[:mid_idx]
+        return binary_search(left_half, target)
