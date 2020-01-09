@@ -1,22 +1,25 @@
-def binary_search(sorted_list, target):
-    if not sorted_list:
+def binary_search(sorted_list, left_pointer, right_pointer, target):
+    if left_pointer >= right_pointer: # indicates an empty sub-list
         return "value not found"
 
-    mid_idx = len(sorted_list) // 2
+    # calculate midpoint from pointers
+    mid_idx = (left_pointer + right_pointer) // 2
     mid_val = sorted_list[mid_idx]
 
     if mid_val == target:
         return mid_idx
 
     if mid_val > target:
-        left_half = sorted_list[:mid_idx]
-        return binary_search(left_half, target)
+        # reduce the sub-list by passing in a new right pointer
+        return binary_search(sorted_list, left_pointer, mid_idx, target)
 
     if mid_val < target:
-        right_half = sorted_list[mid_idx + 1:]
-        result = binary_search(right_half, target)
-        
-        if result == "value not found":
-            return result
+        # reduce the sub-list by passing in a new left pointer
+        return binary_search(sorted_list, mid_idx + 1, right_pointer, target)
 
-        return result + mid_idx + 1 # account for missing left hand indices
+values = [77, 80, 102, 123, 288, 300, 540]
+start_of_values = 0
+end_of_values = len(values)
+result = binary_search(values, start_of_values, end_of_values, 288)
+
+print("element {} is located at index {}".format(288, result))
