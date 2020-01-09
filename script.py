@@ -5,4 +5,5 @@ def binary_search(sorted_list, target):
     mid_idx = len(sorted_list) // 2
     mid_val = sorted_list[mid_idx]
 
-    return mid_idx, mid_val
+    if mid_val == target:
+        return mid_idx
